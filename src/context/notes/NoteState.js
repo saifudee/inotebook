@@ -20,7 +20,7 @@ const getNote = async()=>{
   setNotes(json)
 }
 const addNote = async(title,description,tag)=>{
-  const response = await fetch(`${host}/api/notes/addnote`,{
+  const response = await fetch(`${host}api/notes/addnote`,{
     method:'POST',
     headers:{
       "Content-Type":"application/json",
@@ -28,19 +28,20 @@ const addNote = async(title,description,tag)=>{
     },
     body:JSON.stringify({title,description,tag})
   })
-//  const note={
-//   "user": "62236ca5f3c150792ae34342",
-//   "title":title,
-//   "description":description,
-//   "tag":tag,
-//   "_id": "622973fcb2c6b427c379a133e",
-//   "date": "2022-03-10T03:43:56.373Z",
-//   "__v": 0
-// }
-//   setNotes(notes.concat(note))
+  console.log(response)
+ const note={
+  "user": "62236ca5f3c150792ae34342",
+  "title":title,
+  "description":description,
+  "tag":tag,
+  "_id": "622973fcb2c6b427c379a133e",
+  "date": "2022-03-10T03:43:56.373Z",
+  "__v": 0
+}
+  setNotes(notes.concat(note))
 }
 const editNote = async(id,title,description,tag)=>{
-  const response = await fetch(`${host}/api/notes/updatenote/${id}`,{
+  const response = await fetch(`${host}api/notes/updatenote/${id}`,{
     method: 'POST',
     headers:{
       'Content-Type':'application/json',
@@ -60,17 +61,14 @@ const editNote = async(id,title,description,tag)=>{
   }
 }
 const deleteNote = async(id)=>{
-  const response = await fetch(`${host}/api/notes/deletenote/${id}`,{
+  const response = await fetch(`${host}api/notes/deletenote/${id}`,{
     method:'DELETE',
     headers:{
       'Content-Type':'application/json',
       "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyMzZjYTVmM2MxNTA3OTJhZTM0MzQ1In0sImlhdCI6MTY0NjQ5NTAyMX0.HVoNJWfOt5NnDZ398Ycnhn8NbvCJPJKKOqFldR5FyeY"
     },
-  })
-  // .then((response) => response.json())
-  // .then((messages) => {console.log(messages);});
+  });
   const json = response.json();
-  console.log("Deklere"+id)
   console.log(json);
   const newNotes = notes.filter((notes)=>{return notes._id!==id})
   setNotes(newNotes)

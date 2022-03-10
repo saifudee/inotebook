@@ -41,24 +41,36 @@ const addNote = async(title,description,tag)=>{
 }
 const editNote = async(id,title,description,tag)=>{
   const response = await fetch(`${host}/api/notes/updatenote/${id}`,{
-    method:'POST',
+    method: 'POST',
     headers:{
       'Content-Type':'application/json',
-      'auth-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyMzZjYTVmM2MxNTA3OTJhZTM0MzQ1In0sImlhdCI6MTY0NjQ5NTAyMX0.HVoNJWfOt5NnDZ398Ycnhn8NbvCJPJKKOqFldR5FyeY"
+      "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyMzZjYTVmM2MxNTA3OTJhZTM0MzQ1In0sImlhdCI6MTY0NjQ5NTAyMX0.HVoNJWfOt5NnDZ398Ycnhn8NbvCJPJKKOqFldR5FyeY"
     },
     body:JSON.stringify({title,description,tag})
   })
   const json = response.json();
+  // console.log(json)
   for (let index = 0; index <notes.length; index++) {
     const element = notes[index];
     if(element._id === id){
-      element.title = title
-      element.description= description
-      element.tag = tag
+      element.title = title;
+      element.description= description;
+      element.tag = tag;
     }
   }
 }
-const deleteNote = (id)=>{
+const deleteNote = async(id)=>{
+  const response = await fetch(`${host}/api/notes/deletenote/${id}`,{
+    method:'DELETE',
+    headers:{
+      'Content-Type':'application/json',
+      "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIyMzZjYTVmM2MxNTA3OTJhZTM0MzQ1In0sImlhdCI6MTY0NjQ5NTAyMX0.HVoNJWfOt5NnDZ398Ycnhn8NbvCJPJKKOqFldR5FyeY"
+    },
+  })
+  const json = response.json();
+  console.log("Deklere"+id)
+  console.log(json)
+
   const newNotes = notes.filter((notes)=>{return notes._id!==id})
   setNotes(newNotes)
 }

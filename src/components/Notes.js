@@ -7,9 +7,8 @@ const Notes = () => {
   const context = useContext( noteContext)
   const {notes,getNotes} = context
   useEffect(() => {
-   getNotes()
+   getNotes();
   },[])
-  
   return (
     <>
     <AddNote/>

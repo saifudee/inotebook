@@ -28,7 +28,8 @@ const addNote = async(title,description,tag)=>{
     },
     body:JSON.stringify({title,description,tag})
   })
-  console.log(response)
+  const json = response.json();
+  // console.log(response)
  const note={
   "user": "62236ca5f3c150792ae34342",
   "title":title,

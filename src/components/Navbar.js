@@ -3,7 +3,7 @@ import {Link,useLocation} from "react-router-dom";
 const Navbar = () => {
   let location = useLocation()
   useEffect(()=>{
-    console.log(location)
+    // console.log(location)
   },[location])
   return (
     <>
@@ -19,12 +19,12 @@ const Navbar = () => {
           <Link className={`nav-link ${location.pathname==="/"?"active":""}`} aria-current="page" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to={`nav-link ${location.pathname==="/about"?"active":""}`}>About</Link>
+          <Link className={`nav-link ${location.pathname==="/about"?"active":""}`} to="/about">About</Link>
         </li>
       </ul>
       <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
+      <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
+      <Link className="btn btn-primary mx-1" to="/signup" role="button">Signup</Link>
       </form>
     </div>
   </div>
